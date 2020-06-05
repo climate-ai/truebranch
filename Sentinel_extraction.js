@@ -3,6 +3,7 @@
  * @param {ee.Image} image Sentinel-2 image
  * @return {ee.Image} cloud masked Sentinel-2 image
  */
+
 function maskS2clouds(image) {
   var qa = image.select('QA60');
 
@@ -17,19 +18,21 @@ function maskS2clouds(image) {
   return image.updateMask(mask).divide(10000);
 }
 
-var rec = ee.Geometry.Rectangle(-119.71, 36.45, -119.65, 36.51)
+//var area = ee.Geometry.Rectangle(-119.71, 36.45, -119.65, 36.51)
+var area= ee.Geometry.Rectangle(-120.25, 36.45, -119.65,37.05) //Tile2Vec Area
+
 
 // Map the function over one year of data and take the median.
 // Load Sentinel-2 TOA reflectance data.
 var dataset = ee.ImageCollection('COPERNICUS/S2')
-                  .filterDate('2018-01-01', '2018-06-30')
-                  .filterBounds(rec)
+                  .filterDate('2016-01-01', '2016-12-31')
+                  .filterBounds(area)
                   // Pre-filter to get less cloudy granules.
                   .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
                   .map(maskS2clouds);
-var a = dataset.select(['B4', 'B3', 'B2']).mosaic()
+var mosaic = dataset.select(['B4', 'B3', 'B2']).mosaic()
 
-print(a)
+print(mosaic)
 
 var rgbVis = {
   min: 0.0,
@@ -38,12 +41,12 @@ var rgbVis = {
 };
 
 Map.setCenter(-119.71, 36.45, 10);
-Map.addLayer(a, rgbVis, 'RGB');
+Map.addLayer(mosaic, rgbVis, 'RGB');
 
 Export.image.toDrive({
-  image: a,
-  description: 'Sentienl_31_05_1',
+  image: mosaic,
+  description: 'SentinelTile2VecArea',
   scale: 10,
-  region: rec, // .geometry().bounds() needed for multipolygon
+  region: area, // .geometry().bounds() needed for multipolygon
   maxPixels: 2000000000
 });
