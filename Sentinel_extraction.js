@@ -18,8 +18,7 @@ function maskS2clouds(image) {
   return image.updateMask(mask).divide(10000);
 }
 
-//var area = ee.Geometry.Rectangle(-119.71, 36.45, -119.65, 36.51)
-var area= ee.Geometry.Rectangle(-120.25, 36.45, -119.65,37.05) //Tile2Vec Area
+var area= ee.Geometry.Rectangle(-120.25, 36.45, -119.65,37.05) //Extracted Area
 
 
 // Map the function over one year of data and take the median.
@@ -30,9 +29,8 @@ var dataset = ee.ImageCollection('COPERNICUS/S2')
                   // Pre-filter to get less cloudy granules.
                   .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
                   .map(maskS2clouds);
-var mosaic = dataset.select(['B4', 'B3', 'B2']).mosaic()
 
-print(mosaic)
+var mosaic = dataset.select(['B4', 'B3', 'B2']).mosaic()
 
 var rgbVis = {
   min: 0.0,
@@ -43,9 +41,11 @@ var rgbVis = {
 Map.setCenter(-119.71, 36.45, 10);
 Map.addLayer(mosaic, rgbVis, 'RGB');
 
+var Sentinel_RGB = mosaic.visualize({bands: ['B4', 'B3', 'B2'], min: 0.0, max: 0.3});
+
 Export.image.toDrive({
-  image: mosaic,
-  description: 'SentinelTile2VecArea',
+  image: Sentinel_RGB,
+  description: 'Sentinel_image',
   scale: 10,
   region: area, // .geometry().bounds() needed for multipolygon
   maxPixels: 2000000000

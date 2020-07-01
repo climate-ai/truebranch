@@ -1,5 +1,5 @@
 //var area= ee.Geometry.Rectangle(-119.71, 36.45, -119.65, 36.51)
-var area = ee.Geometry.Rectangle(-120.25, 36.45, -119.65,37.05) //Tile2Vec Area
+var area = ee.Geometry.Rectangle(-120.25, 36.45, -119.65,37.05) //Extracted Area
 
 // Load four 2012 NAIP quarter quads, different locations.
 var naip2016 = ee.ImageCollection('USDA/NAIP/DOQQ')
@@ -8,16 +8,17 @@ var naip2016 = ee.ImageCollection('USDA/NAIP/DOQQ')
 
 // Spatially mosaic the images in the collection and display.
 var naip_mosaic = naip2016.mosaic();
-print(naip_mosaic)
 
 Map.setCenter(-119.71,36.45, 10);
 Map.addLayer(naip_mosaic, {}, 'spatial mosaic');
 Map.addLayer(area, {color: 'FF0000'}, 'geodesic polygon');
 
+var Naip_RGB = naip_mosaic.visualize({bands: ['B4', 'B3', 'B2']});
+
 // Export a cloud-optimized GeoTIFF.
 Export.image.toDrive({
-  image: naip_mosaic,
-  description: 'NAIPTile2VecArea',
+  image: Naip_RGB,
+  description: 'NAIP_image',
   scale: 1,
   region: area,
   fileFormat: 'GeoTIFF',
