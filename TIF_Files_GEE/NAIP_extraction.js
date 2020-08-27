@@ -13,7 +13,7 @@ Map.setCenter(-119.71,36.45, 10);
 Map.addLayer(naip_mosaic, {}, 'spatial mosaic');
 Map.addLayer(area, {color: 'FF0000'}, 'geodesic polygon');
 
-var Naip_RGB = naip_mosaic.visualize({bands: ['B4', 'B3', 'B2']});
+var Naip_RGB = naip_mosaic.visualize({bands: ['R', 'G', 'B']});
 
 // Export a cloud-optimized GeoTIFF.
 Export.image.toDrive({
@@ -21,6 +21,7 @@ Export.image.toDrive({
   description: 'NAIP_image',
   scale: 1,
   region: area,
+  maxPixels: 4464043320,
   fileFormat: 'GeoTIFF',
   formatOptions: {
     cloudOptimized: true
