@@ -11,7 +11,7 @@ In the next section different instructions are given for the different steps, fo
 1.	Getting tif files of specific area in google earth engine
 2.	Tif to images locally (jupyter notebooks)
 3.	Training and Testing Model
-4.	Validation with Diagrams and Tensorboard
+4.	Visualisation of test embeddings with Diagrams
 5.	MRS and COS Similarity Classifier 
 6.	RF, MLP, LR Classifier
 
@@ -42,3 +42,6 @@ The goal of this project is to train a model in order to be able to detect whete
 }
 
 The metric learning code of this project can be found in the folder Metric learning, the script to create the training, validation and test embeddings is called "Metric_learning_tripletloss.py", the notebook including visualisations and tensorboard "Metric_Learning_Triplet_Loss.ipynb".
+
+## Visualisation of test embeddings with Diagrams
+The resulted embeddings, representing the images in the trained feature space, are plotted using the seaborn package. The code for visualisation can be found in the folder Visualisation.
