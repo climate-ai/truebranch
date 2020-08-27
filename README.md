@@ -19,6 +19,9 @@ In the next section different instructions are given for the different steps, fo
 Naip tif images (representing high resolution drone images) and Sentinel tif images (at low resolution) are collected for the area xxx.
 Script to collect Naip Tif files: NAIP_extraction.js 
 Script to collect Sentinel Tif files: Sentinel_extraction.js
+Extracted area defined inside scripts (here Central Valley, California, spanning latitudes [36:45;37:05] and longitudes [-120:25;-119:65].
+
+## Transfering Tif files to images, locally (jupyter notebooks)
 
 What the project does
 Why the project is useful
