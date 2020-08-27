@@ -21,8 +21,10 @@ Script to collect Naip Tif files: NAIP_extraction.js
 Script to collect Sentinel Tif files: Sentinel_extraction.js
 Extracted area defined inside scripts (here Central Valley, California, spanning latitudes [36:45;37:05] and longitudes [-120:25;-119:65].
 
-## Transforming Tif files to images, locally (jupyter notebooks)
-Extracting 200x200 pixel png images out of a Tif file. 
+## 2. Transforming Tif files to images, locally (jupyter notebooks)
+Extracting 200x200 pixel png images out of a Tif file. This is done in a for loop where the tif file is cropped and the sentinel images upsampeled. The variable origin_path indicates the path where the tif files are saved, origin_path+"/"+temp_path defines where the png images are saved.
+
+## 3.	Training and Testing Model
 
 What the project does
 Why the project is useful
