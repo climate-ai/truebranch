@@ -44,7 +44,7 @@ The goal of this project is to train a model in order to be able to detect whete
 The metric learning code of this project can be found in the folder Metric learning, the script to create the training, validation and test embeddings is called "Metric_learning_tripletloss.py", the notebook including visualisations and tensorboard "Metric_Learning_Triplet_Loss.ipynb".
 
 ## 4. Visualisation of test embeddings with Diagrams
-The resulted embeddings, representing the images in the trained feature space, are plotted using the seaborn package. The code for visualisation can be found in the folder Visualisation.
+The resulted embeddings, representing the images in the trained feature space, are plotted using the seaborn package. The code for visualisation can be found in the folder Visualisation in the document "embed_visualisation.py".
 
 The MSE distance plots for raw images, images in resnet45 feature space and in our feature space (as explained in chapter 4 of the Master Thesis) can be found in the notebook "Metric_Learning_Triplet_Loss.ipynb".
 
