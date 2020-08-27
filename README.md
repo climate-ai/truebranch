@@ -26,12 +26,19 @@ Script to collect Sentinel Tif files: Sentinel_extraction.js
 Extracted area defined inside scripts (here Central Valley, California, spanning latitudes [36:45;37:05] and longitudes [-120:25;-119:65].
 
 ## 2. Transforming Tif files to images, locally (jupyter notebooks)
-Extracting 200x200 pixel png images out of a Tif file. This is done in a for loop where the tif file is cropped and the sentinel images upsampeled. The variable origin_path indicates the path where the tif files are saved, origin_path+"/"+temp_path defines where the png images are saved.
+Extracting 200x200 pixel png images out of a Tif file. This is done in a for loop where the tif file is cropped and the sentinel images upsampeled. The variable origin_path indicates the path where the tif files are saved, origin_path+"/"+temp_path defines where the png images are saved. The created dataset includes 2324 train images,
+166 test images and 166 validation images.
 
 ## 3.	Training and Testing Model
+The goal of this project is to train a model in order to be able to detect wheter two images from a different source with different resoltutions are from the same location or not. A CNN is trained and tested using the train, test and validation set created in the step above. The exact procedure is furthur explained in the Master Thesis "TrueBranch.pdf". The metric learning with Triplet loss is implemented using Kevin Musgrave's pytorch metric learning library (https://kevinmusgrave.github.io/pytorch-metric-learning/). If you use this code, please additionally cite his work:
 
-What the project does
-Why the project is useful
-How users can get started with the project
-Where users can get help with your project
-Who maintains and contributes to the project
+@misc{musgrave2020pytorch,
+    title={PyTorch Metric Learning},
+    author={Kevin Musgrave and Serge Belongie and Ser-Nam Lim},
+    year={2020},
+    eprint={2008.09164},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+
+The metric learning code of this project can be found in the folder Metric learning, the script to create the training, validation and test embeddings is called "Metric_learning_tripletloss.py", the notebook including visualisations and tensorboard "Metric_Learning_Triplet_Loss.ipynb".
