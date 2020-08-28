@@ -29,9 +29,9 @@ val_transform = transforms.Compose([transforms.Resize(224),
                                     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
 
 # loading the data, creating three different sets
-train_dataset =  datasets.ImageFolder('/Users/Simona/Documents/Studium/MasterThesisFolder/AdditionalCode/Fresno_Area/train', transform=train_transform)
-val_dataset =  datasets.ImageFolder('/Users/Simona/Documents/Studium/MasterThesisFolder/AdditionalCode/Fresno_Area/val', transform=val_transform)
-test_dataset =  datasets.ImageFolder('/Users/Simona/Documents/Studium/MasterThesisFolder/AdditionalCode/Fresno_Area/test', transform=val_transform)
+train_dataset =  datasets.ImageFolder('../dataset/train', transform=train_transform)
+val_dataset =  datasets.ImageFolder('../dataset/val', transform=val_transform)
+test_dataset =  datasets.ImageFolder('../dataset/test', transform=val_transform)
 
 
 # Model definition
@@ -144,9 +144,9 @@ train_emb,train_lab = tester.get_all_embeddings(train_dataset,trunk_model = trun
 val_emb, val_lab = tester.get_all_embeddings(val_dataset, trunk_model = trunk, embedder_model=embedder)
 test_emb, test_lab = tester.get_all_embeddings(test_dataset, trunk_model = trunk, embedder_model=embedder)
 
-np.savetxt('/Users/Simona/Fresno_Area/train_emb_triplet',train_emb)
-np.savetxt('/Users/Simona/Fresno_Area/train_lab_triplet',train_lab)
-np.savetxt('/Users/Simona/Fresno_Area/val_emb_triplet',val_emb)
-np.savetxt('/Users/Simona/Fresno_Area/val_lab_triplet',val_lab)
-np.savetxt('/Users/Simona/Fresno_Area/test_emb_triplet',test_emb)
-np.savetxt('/Users/Simona/Fresno_Area/test_lab_triplet',test_lab)
+np.savetxt('../embeddings/train_emb_triplet',train_emb)
+np.savetxt('../embeddings/train_lab_triplet',train_lab)
+np.savetxt('../embeddings/val_emb_triplet',val_emb)
+np.savetxt('../embeddings/val_lab_triplet',val_lab)
+np.savetxt('../embeddings/test_emb_triplet',test_emb)
+np.savetxt('../embeddings/test_lab_triplet',test_lab)

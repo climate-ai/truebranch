@@ -172,3 +172,105 @@ for idx in range(n_tiles):
 
 np.savetxt('/Users/Simona/Fresno_Area/X_train_raw',X_train)
 np.savetxt('/Users/Simona/Fresno_Area/X_test_raw',X_test)
+
+#Tile2Vec
+
+import numpy as np
+import os
+import torch
+from time import time
+from torch.autograd import Variable
+from PIL import Image
+
+import sys
+sys.path.append('../')
+sys.path.append('/Users/Simona/tile2vec/src')
+import tilenet
+from tilenet import make_tilenet
+import resnet
+from resnet import ResNet18
+#from src.tilenet import make_tilenet
+#from src.resnet import ResNet18
+import torchvision
+from torchvision import datasets, transforms
+
+#Loading pretrained models# Setting up model
+in_channels = 4
+z_dim = 512
+cuda = torch.cuda.is_available()
+# tilenet = make_tilenet(in_channels=in_channels, z_dim=z_dim)
+# Use old model for now
+tilenet = ResNet18()
+if cuda: tilenet.cuda()
+
+# Load parameters
+model_fn = '../models/naip_trained.ckpt'
+print(model_fn)
+checkpoint = torch.load(model_fn,map_location=torch.device('cpu'))
+tilenet.load_state_dict(checkpoint)
+tilenet.eval()
+
+#Embed NAIP tiles
+from torchvision import datasets, transforms
+
+# Set the image transforms
+train_transform = transforms.Compose([transforms.Resize(100),
+                                    #transforms.RandomResizedCrop(scale=(0.16, 1), ratio=(0.75, 1.33), size=64),
+                                    #transforms.RandomHorizontalFlip(0.5),
+                                    transforms.ToTensor(),
+                                    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
+
+val_transform = transforms.Compose([transforms.Resize(100),
+                                    transforms.ToTensor(),
+                                    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
+
+
+train_dataset =  datasets.ImageFolder('/Users/Simona/Fresno_Area/train', transform=train_transform)
+val_dataset =  datasets.ImageFolder('/Users/Simona/Fresno_Area/val', transform=val_transform)
+test_dataset =  datasets.ImageFolder('/Users/Simona/Fresno_Area/test', transform=val_transform)
+
+#Train Embeddings
+# Embed tiles
+from torch.autograd import Variable
+n_tiles = len(train_dataset)
+z_dim = 512
+X_train = np.zeros((n_tiles, z_dim))
+for idx in range(n_tiles):
+    tile = train_dataset[idx][0]
+    tile = tile.numpy()
+    tile = np.concatenate((tile, np.zeros((1, 100, 100))), axis=0)
+    tile = np.expand_dims(tile, axis=0)
+    # Scale to [0, 1]
+    tile = tile / 255
+    # Embed tile
+    tile = torch.from_numpy(tile).float()
+    tile = Variable(tile)
+    z = tilenet.encode(tile)
+    z = z.data.numpy()
+    #print(z.shape)
+    X_train[idx,:] = z
+
+np.savetxt('/Users/Simona/Fresno_Area/X_train_tile2vec',X_train)
+
+
+# Embed tiles
+from torch.autograd import Variable
+n_tiles = len(test_dataset)
+z_dim = 512
+X_test = np.zeros((n_tiles, z_dim))
+for idx in range(n_tiles):
+    tile = test_dataset[idx][0]
+    tile = tile.numpy()
+    tile = np.concatenate((tile, np.zeros((1, 100, 100))), axis=0)
+    tile = np.expand_dims(tile, axis=0)
+    # Scale to [0, 1]
+    tile = tile / 255
+    # Embed tile
+    tile = torch.from_numpy(tile).float()
+    tile = Variable(tile)
+    z = tilenet.encode(tile)
+    z = z.data.numpy()
+    #print(z.shape)
+    X_test[idx,:] = z
+
+np.savetxt('/Users/Simona/Fresno_Area/X_test_tile2vec',X_test)
