@@ -9,7 +9,7 @@ In the next section different instructions are given for the different steps, fo
 ## Workflow:
 
 1.	Getting tif files of specific area in google earth engine
-2.	Tif to images locally (jupyter notebooks)
+2.	Tif to png transformation
 3.	Training and Testing Model
 4.	Visualisation of test embeddings with Diagrams
 5.	MRS and COS Similarity Classifier 
@@ -26,7 +26,7 @@ Script to collect Sentinel Tif files: Sentinel_extraction.js
 Extracted area defined inside scripts (here Central Valley, California, spanning latitudes [36:45;37:05] and longitudes [-120:25;-119:65]).
 The tif files are exported to Google Drive. Here the extraced tif files can be found in the data folder.
 
-## 2. Transforming Tif files to images, locally (jupyter notebooks)
+## 2. Transforming Tif files to images
 Extracting 200x200 pixel png images out of a Tif file. This is done in a for loop where the tif file is cropped and the sentinel images upsampeled. The variable origin_path indicates the path where the tif files are saved, origin_path+"/"+temp_path defines where the png images are saved. The created dataset includes 2324 train images,
 166 test images and 166 validation images.
 Here the images are stored in the data folder.
