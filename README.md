@@ -24,7 +24,7 @@ Naip tif images (representing high resolution drone images) and Sentinel tif ima
 Script to collect Naip Tif files: NAIP_extraction.js 
 Script to collect Sentinel Tif files: Sentinel_extraction.js
 Extracted area defined inside scripts (here Central Valley, California, spanning latitudes [36:45;37:05] and longitudes [-120:25;-119:65]).
-Here the tif files are stored in the data folder.
+The tif files are exported to Google Drive. Here the extraced tif files can be found in the data folder.
 
 ## 2. Transforming Tif files to images, locally (jupyter notebooks)
 Extracting 200x200 pixel png images out of a Tif file. This is done in a for loop where the tif file is cropped and the sentinel images upsampeled. The variable origin_path indicates the path where the tif files are saved, origin_path+"/"+temp_path defines where the png images are saved. The created dataset includes 2324 train images,
