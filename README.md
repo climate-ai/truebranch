@@ -49,6 +49,7 @@ The resulted embeddings, representing the images in the trained feature space, a
 The MSE distance plots for raw images, images in resnet45 feature space and in our feature space (as explained in chapter 4 of the Master Thesis) can be found in the notebook "Metric_Learning_Triplet_Loss.ipynb".
 
 ## 5.MRS and COS Similarity Classifier 
+The Mean Square Error and COS Similarity are threshold based classifiers, evaluating the performance of different embeddings. The classifiers are implemented in "MSE_COS_accuracy.py" in the folder Classifier.
 
 ## 6.	RF, MLP, LR Classifier
 The Random forest, Logistic Regression, Multi-layer Perceptron Classifiers are applied to the embeddings in order to evaluate the quality of the embeddings. The classifiers are implemented in the document "RF_LR_MLP_Classifier.py" inside the Classifier folder. Beside the truebranch embeddings, a feature extraction baseline is implemented to compare these embeddings to others. The baseline is presented in the Thesis. The script "Applying_diff_Classifiers.py" calculates the accuracy for the different embeddings. 
