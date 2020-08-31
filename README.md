@@ -2,7 +2,7 @@
 
 TrueBranch is a novel way of distinguishing truthfully from untruthfully reported imagery by using low-resolution satellite data to verify the location of high-resolution drone data.
 
-This project collects tif files from googel earth engine, transforms them to the right image format, trains a deep neural network on matching images with different resolutions coming from a different source and compares different classifiers.
+This project collects tif files from googel earth engine, transforms them to png, trains a deep neural network to detect wheter images with different resolutions from different sources are from the same location and as a last step applies and compares different classifiers.
 
 In the next section different instructions are given for the different steps, following this workflow:
 
