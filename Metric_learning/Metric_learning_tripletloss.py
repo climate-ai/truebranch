@@ -144,6 +144,9 @@ train_emb,train_lab = tester.get_all_embeddings(train_dataset,trunk_model = trun
 val_emb, val_lab = tester.get_all_embeddings(val_dataset, trunk_model = trunk, embedder_model=embedder)
 test_emb, test_lab = tester.get_all_embeddings(test_dataset, trunk_model = trunk, embedder_model=embedder)
 
+#The embeddings will be further used for visualisation and classification
+#Adapt this path to your own architecture
+
 np.savetxt('../embeddings/train_emb_triplet',train_emb)
 np.savetxt('../embeddings/train_lab_triplet',train_lab)
 np.savetxt('../embeddings/val_emb_triplet',val_emb)
