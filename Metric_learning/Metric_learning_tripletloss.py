@@ -90,7 +90,7 @@ sampler = samplers.MPerClassSampler(train_dataset.targets, m=2, length_before_ne
 
 # Set other training parameters
 batch_size = 64
-num_epochs = 4
+num_epochs = 1
 
 # Package the above stuff into dictionaries.
 models = {"trunk": trunk, "embedder": embedder}
