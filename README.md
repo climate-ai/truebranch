@@ -12,8 +12,8 @@ In the next section different instructions are given for the different steps, fo
 2.	Tif to png transformation
 3.	Training and Testing Model
 4.	Visualisation of test embeddings with Diagrams
-5.	MRS and COS Similarity Classifier 
-6.	RF, MLP, LR Classifier
+5.	MRS and COS Similarity Classifier (for a feature extraction baseline and our model)
+6.	RF, MLP, LR Classifier (for a feature extraction baseline and our model)
 
 ## Requiremens:
 This project was built with a virtual environment, using conda. The requirements.txt lists all needed packages. 
