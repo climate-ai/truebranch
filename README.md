@@ -18,6 +18,8 @@ In the next section different instructions are given for the different steps, fo
 ## Requiremens:
 This project was built with a virtual environment, using conda. The requirements.txt lists all needed packages. 
 The conda virtual environment file "truebranch.yml" can be downloaded and activated with the command: conda env create -f <environment-name>.yml (here: conda env create -f truebranch.yml)
+    
+In this script, the embeddings are saved in the folder '/Users/Simona/Fresno_Area/'. Adapt this for your own use. 
 
 ## 1. Collecting Tif files from google earth engine - Folder "TIF_Files_GEE"
 Naip tif images (representing high resolution drone images) and Sentinel tif images (at low resolution) are collected for the area around Fresno in California. 
