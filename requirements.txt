@@ -67,7 +67,7 @@ pyrsistent==0.16.0
 python-dateutil==2.8.1
 pytorch-metric-learning==0.9.87.dev4
 pytz==2020.1
-PyYAML==5.3.1
+PyYAML==5.4
 pyzmq==19.0.2
 record-keeper==0.9.26
 requests==2.24.0
